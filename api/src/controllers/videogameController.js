@@ -123,4 +123,46 @@ const getAllVideogameSearchGame = async (req, res) => {
   }
 };
 
-module.exports = { getAllVideogameSearchGame };
+// Crear Videogame
+
+const postVideogame = async (req, res) => {
+  const {
+    name,
+    description,
+    released,
+    genres,
+    platforms,
+    rating,
+    background_image,
+    createdDatabase,
+  } = req.body;
+
+  if (!name) res.status(404).send("El nombre es obligatorio");
+  if (!description) res.status(404).send("La descripcion es obligatoria");
+  if (!platforms) res.status(404).send("Las plataformas son obligatorias");
+
+  try {
+    const newVideogame = await Videogame.create({
+      name,
+      description,
+      released,
+      platforms,
+      rating,
+      background_image,
+      createdDatabase,
+    });
+
+    const genre = await Genre.findAll({
+      where: {
+        name: genres,
+      },
+    });
+    newVideogame.addGenre(genre);
+
+    return res.status(201).send(newVideogame);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getAllVideogameSearchGame, postVideogame };

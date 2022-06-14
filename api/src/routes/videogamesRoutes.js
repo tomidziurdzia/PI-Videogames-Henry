@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const {
   getAllVideogameSearchGame,
+  postVideogame,
 } = require("../controllers/videogameController.js");
 
 const router = Router();
 
-router.get("/", getAllVideogameSearchGame);
+router.route("/").get(getAllVideogameSearchGame).post(postVideogame);
 
 module.exports = router;
