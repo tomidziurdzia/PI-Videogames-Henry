@@ -8,7 +8,7 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-//router.use("/videogames", () => console.log("hola"));
+router.use("/videogames", videogamesRoutes);
 //router.use("/videogame", () => console.log("hola"));
 router.use("/genres", genresRoutes);
 
