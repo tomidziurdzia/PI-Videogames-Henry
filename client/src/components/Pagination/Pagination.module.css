@@ -1,0 +1,28 @@
+.container {
+  margin: auto;
+  display: flex;
+  width: 30%;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  background: #151515;
+  border: none;
+}
+
+.btnNone {
+  display: none;
+}
+
+.btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.page {
+  color: white;
+  font-size: 3rem;
+  margin: 0 5rem;
+}

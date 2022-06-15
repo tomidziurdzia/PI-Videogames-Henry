@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_VIDEOGAMES, LOADING } from "../types";
+import { GET_VIDEOGAMES, LOADING, SET_PAGE } from "../types";
 
 //const URL = process.env.BACKEND_URL;
 
@@ -24,4 +24,11 @@ const loading = (option) => {
   };
 };
 
-export { getVideogames, loading };
+const setPage = (payload) => {
+  return {
+    type: SET_PAGE,
+    payload,
+  };
+};
+
+export { getVideogames, loading, setPage };

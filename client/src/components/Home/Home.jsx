@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Videogames from "../Videogames/Videogames";
+import Pagination from "../Pagination/Pagination";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       </header>
       <main>
         <Videogames />
+        <Pagination />
       </main>
     </>
   );

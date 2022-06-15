@@ -1,8 +1,9 @@
-import { GET_VIDEOGAMES, LOADING } from "../types";
+import { GET_VIDEOGAMES, LOADING, SET_PAGE } from "../types";
 
 const initialState = {
   videogames: [],
   loading: true,
+  page: 1,
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +21,14 @@ const reducer = (state = initialState, action) => {
         loading: action.payload,
       };
     }
+
+    case SET_PAGE: {
+      return {
+        ...state,
+        page: action.payload,
+      };
+    }
+
     default:
       return state;
   }
