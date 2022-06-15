@@ -1,0 +1,19 @@
+.searchContainer {
+  display: flex;
+  background: white;
+  margin-right: 10rem;
+  padding: 0.5rem 1rem;
+  margin-top: 2rem;
+  border-radius: 10px;
+}
+
+.searchBar {
+  font-size: 1.5rem;
+  width: 30rem;
+  color: #151515;
+  border: none;
+}
+
+.searchBar:focus {
+  outline: none;
+}

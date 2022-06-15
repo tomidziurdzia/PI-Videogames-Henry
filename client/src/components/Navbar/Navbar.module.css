@@ -1,0 +1,17 @@
+.background {
+  background: #151515;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleLink {
+  text-decoration: none;
+  color: white;
+}
+
+.title {
+  font-size: 3rem;
+  margin-left: 2rem;
+}
