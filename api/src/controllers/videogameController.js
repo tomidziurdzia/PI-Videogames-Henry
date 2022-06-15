@@ -179,7 +179,7 @@ const getVideogame = async (req, res) => {
 };
 
 // Crear Videogame
-const postVideogame = async (req, res) => {
+const createVideogame = async (req, res) => {
   const {
     name,
     description,
@@ -244,11 +244,11 @@ const updateVideogame = async (req, res) => {
     genres,
     background_image,
   } = req.body;
-  if (!name || !description || !platforms) {
-    return res
-      .status(404)
-      .send("Nombre, descripción y plataformas son requeridos");
-  }
+
+  if (!name) res.status(404).send("El nombre es obligatorio");
+  if (!description) res.status(404).send("La descripcion es obligatoria");
+  if (!platforms) res.status(404).send("Las plataformas son obligatorias");
+
   try {
     await Videogame.update(
       {
@@ -273,7 +273,7 @@ const updateVideogame = async (req, res) => {
 module.exports = {
   getAllVideogameSearchGame,
   getVideogame,
-  postVideogame,
+  createVideogame,
   deleteVideogame,
   updateVideogame,
 };

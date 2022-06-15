@@ -2,14 +2,14 @@ const { Router } = require("express");
 const {
   getAllVideogameSearchGame,
   getVideogame,
-  postVideogame,
+  createVideogame,
   deleteVideogame,
   updateVideogame,
 } = require("../controllers/videogameController.js");
 
 const router = Router();
 
-router.route("/").get(getAllVideogameSearchGame).post(postVideogame);
+router.route("/").get(getAllVideogameSearchGame).post(createVideogame);
 router
   .route("/:id")
   .get(getVideogame)
