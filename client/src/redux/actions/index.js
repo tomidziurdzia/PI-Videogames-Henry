@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_VIDEOGAMES, LOADING, SET_PAGE } from "../types";
+import { GET_VIDEOGAMES, LOADING, SET_PAGE, GAME_DETAIL } from "../types";
 
 //const URL = process.env.BACKEND_URL;
 
@@ -31,4 +31,20 @@ const setPage = (payload) => {
   };
 };
 
-export { getVideogames, loading, setPage };
+const getGameDetail = (id) => {
+  return async (dispatch) => {
+    try {
+      const gameDetail = await axios.get(
+        `http://localhost:3001/videogame/${id}`
+      );
+      return dispatch({
+        type: GAME_DETAIL,
+        payload: gameDetail.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export { getVideogames, loading, setPage, getGameDetail };

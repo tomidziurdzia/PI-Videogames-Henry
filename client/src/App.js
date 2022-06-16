@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import LandingPage from "./components/LandingPage/LandingPage";
 import Home from "./components/Home/Home";
-import VideogameDetail from "./components/VideogameDetail/VideogameDetail";
+import GameDetail from "./components/GameDetail/GameDetail";
 
 //Redux
 import { Provider } from "react-redux";
@@ -15,7 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/videgame/:id" element={<VideogameDetail />} />
+          <Route path="/videogame/:id" element={<GameDetail />} />
         </Routes>
       </BrowserRouter>
     </Provider>
