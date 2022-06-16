@@ -33,6 +33,7 @@ const Videogames = () => {
           <div className={styles.container}>
             {videogames.slice(indexPageLast, indexPage).map((game) => (
               <Videogame
+                id={game.id}
                 key={game.id}
                 name={game.name}
                 background_image={game.background_image}
