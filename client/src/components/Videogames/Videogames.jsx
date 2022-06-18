@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames } from "../../redux/actions";
+import { getVideogames, setLoading } from "../../redux/actions";
 import styles from "./Videogames.module.css";
 
 import Videogame from "../Videogame/Videogame";
@@ -19,6 +19,7 @@ const Videogames = () => {
   console.log(indexPageLast);
 
   useEffect(() => {
+    dispatch(setLoading(true));
     dispatch(getVideogames());
   }, [dispatch]);
 
