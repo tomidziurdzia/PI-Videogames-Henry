@@ -7,6 +7,7 @@ import GameDetail from "./components/GameDetail/GameDetail";
 //Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import CreateGame from "./components/CreateGame/CreateGame";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/videogame/:id" element={<GameDetail />} />
+          <Route path="/new" element={<CreateGame />} />
         </Routes>
       </BrowserRouter>
     </Provider>

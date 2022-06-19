@@ -18,6 +18,8 @@ const GameDetail = () => {
     dispatch(setLoading(true));
   }, [dispatch, id]);
 
+  console.log(videogame);
+
   return (
     <>
       {loading ? (
@@ -34,10 +36,24 @@ const GameDetail = () => {
             />
           </div>
           <div className={styles.genresDetailContainer}>
-            <p className={styles.genres}>{videogame.genres?.join(" - ")}</p>
-            <p className={styles.platforms}>
-              {videogame.platforms?.join(" - ")}
-            </p>
+            <div className={styles.genPlatDate}>
+              <p className={styles.title}>Generos: </p>
+              <p className={styles.genres}>
+                {videogame.createdDatabase
+                  ? videogame.genres?.map((e) => e.name).join(" - ")
+                  : videogame.genres?.join(" - ")}
+              </p>
+            </div>
+            <div className={styles.genPlatDate}>
+              <p className={styles.title}>Plataformas: </p>
+              <p className={styles.platforms}>
+                {videogame.platforms?.join(" - ")}
+              </p>
+            </div>
+            <div className={styles.genPlatDate}>
+              <p className={styles.title}>Fecha de Lanzamiento:</p>
+              <p>{videogame.released}</p>
+            </div>
           </div>
           <div className={styles.detailContainer}>
             <p className={styles.rating}>{videogame.rating}</p>
@@ -50,7 +66,7 @@ const GameDetail = () => {
               <button className={styles.btnDelete}>Delete</button>
             </div>
           ) : (
-            ""
+            <div></div>
           )}
         </div>
       )}

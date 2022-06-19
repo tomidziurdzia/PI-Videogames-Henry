@@ -37,7 +37,7 @@ const createVideogame = async (req, res) => {
 
     newVideogame.addGenre(genresDB);
 
-    //console.log(newVideogame);
+    console.log(newVideogame);
     return res.status(201).send(newVideogame);
   } catch (error) {
     console.log(error);

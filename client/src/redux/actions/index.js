@@ -77,7 +77,7 @@ const postVideogame = (payload) => {
       console.log(videogame);
       return videogame;
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 };

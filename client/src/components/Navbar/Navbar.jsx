@@ -7,7 +7,6 @@ import CreateGame from "../CreateGame/CreateGame";
 import SearchBar from "../SearchBar/SearchBar";
 
 const Navbar = () => {
-  const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
 
   const handleFirstPage = () => {
@@ -21,10 +20,9 @@ const Navbar = () => {
       </Link>
       <SearchBar className={styles.searchBar} />
       <div>Filtros</div>
-      <div>
-        <button onClick={() => setOpenModal(true)}>New Game</button>
-        {openModal && <CreateGame setOpenModal={setOpenModal} />}
-      </div>
+      <Link className={styles.newBtn} to="/new">
+        New Game
+      </Link>
     </div>
   );
 };

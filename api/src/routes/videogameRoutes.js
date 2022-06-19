@@ -8,10 +8,11 @@ const {
 
 const router = Router();
 
+router.post("/", createVideogame);
 router
   .route("/:id")
   .get(getVideogame)
-  .post(createVideogame)
+
   .put(updateVideogame)
   .delete(deleteVideogame);
 module.exports = router;

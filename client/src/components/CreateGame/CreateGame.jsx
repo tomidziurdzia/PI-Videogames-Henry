@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { postVideogame, getGenres } from "../../redux/actions";
 import styles from "./CreateGame.module.css";
 
-const CreateGame = ({ setOpenModal }) => {
+const CreateGame = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const genres = useSelector((state) => state.genres);
@@ -13,10 +13,10 @@ const CreateGame = ({ setOpenModal }) => {
     name: "",
     description: "",
     background_image: "",
-    genre: [],
-    platform: [],
-    rating: 0,
-    //released: Date.now(),
+    genres: [],
+    platforms: [],
+    rating: "",
+    released: Date.now(),
   });
 
   const plataformas = [
@@ -153,8 +153,8 @@ const CreateGame = ({ setOpenModal }) => {
     e.preventDefault();
 
     dispatch(postVideogame(create));
-    setOpenModal(false);
-    console.log(create);
+    console.log("juego creado correctamente");
+    navigate("/home");
   };
 
   useEffect(() => {
@@ -165,10 +165,7 @@ const CreateGame = ({ setOpenModal }) => {
     <div className={styles.modalContainer}>
       <form className={styles.formContainer} onSubmit={handleSubmit}>
         <div className={styles.btnContainer}>
-          <button
-            onClick={() => setOpenModal(false)}
-            className={styles.btnIcon}
-          >
+          <Link className={styles.btnIcon} to="/home">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -183,7 +180,7 @@ const CreateGame = ({ setOpenModal }) => {
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-          </button>
+          </Link>
         </div>
         <div>
           <h3 className={styles.formTitle}>New Game</h3>
@@ -235,7 +232,7 @@ const CreateGame = ({ setOpenModal }) => {
                 className={styles.input}
                 type="number"
                 id="rating"
-                placeholder="Rating"
+                placeholder="0.0"
                 step="0.1"
                 min="0"
                 max="5"
@@ -246,12 +243,24 @@ const CreateGame = ({ setOpenModal }) => {
                 }
               />
             </div>
+            <div className={styles.labelInput}>
+              <label htmlFor="released">Released</label>
+              <input
+                type="date"
+                className={styles.input}
+                name="released"
+                value={create.released}
+                onChange={(e) =>
+                  setCreate({ ...create, released: e.target.value })
+                }
+              />
+            </div>
             <div className={styles.genrePlatform}>
               <div className={styles.labelInputGenrePlatform}>
-                <label htmlFor="genre">Select Genre</label>
+                <label htmlFor="genres">Select Genre</label>
                 <select
                   className={styles.input}
-                  name="genre"
+                  name="genres"
                   defaultValue={"Select Genres"}
                   onChange={handleSelect}
                 >
@@ -262,11 +271,11 @@ const CreateGame = ({ setOpenModal }) => {
                     </option>
                   ))}
                 </select>
-                {create.genre?.map((e) => (
+                {create.genres?.map((e) => (
                   <div key={e} className={styles.selectContainer}>
                     <div>{e}</div>
                     <button
-                      onClick={() => handleDelete(e, "genre")}
+                      onClick={() => handleDelete(e, "genres")}
                       className={styles.btnSelect}
                     >
                       <svg
@@ -289,10 +298,10 @@ const CreateGame = ({ setOpenModal }) => {
               </div>
 
               <div className={styles.labelInputGenrePlatform}>
-                <label htmlFor="platform">Select Platform</label>
+                <label htmlFor="platforms">Select Platform</label>
                 <select
                   className={styles.input}
-                  name="platform"
+                  name="platforms"
                   defaultValue={"Select Platforms"}
                   onChange={handleSelect}
                 >
@@ -303,11 +312,11 @@ const CreateGame = ({ setOpenModal }) => {
                     </option>
                   ))}
                 </select>
-                {create.platform?.map((e) => (
+                {create.platforms?.map((e) => (
                   <div key={e} className={styles.selectContainer}>
                     <div>{e}</div>
                     <button
-                      onClick={() => handleDelete(e, "platform")}
+                      onClick={() => handleDelete(e, "platforms")}
                       className={styles.btnSelect}
                     >
                       <svg
