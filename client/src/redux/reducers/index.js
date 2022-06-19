@@ -1,10 +1,18 @@
-import { GET_VIDEOGAMES, SET_LOADING, SET_PAGE, GAME_DETAIL } from "../types";
+import {
+  GET_VIDEOGAMES,
+  SET_LOADING,
+  SET_PAGE,
+  GAME_DETAIL,
+  GET_GENRES,
+  POST_VIDEOGAMES,
+} from "../types";
 
 const initialState = {
   videogames: [],
   loading: true,
   page: 1,
   detail: {},
+  genres: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +22,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         videogames: action.payload,
         loading: false,
+      };
+    }
+    case GET_GENRES: {
+      return {
+        ...state,
+        genres: action.payload,
       };
     }
     case SET_LOADING: {
@@ -35,6 +49,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         detail: action.payload,
         loading: false,
+      };
+    }
+
+    case POST_VIDEOGAMES: {
+      return {
+        ...state,
       };
     }
 

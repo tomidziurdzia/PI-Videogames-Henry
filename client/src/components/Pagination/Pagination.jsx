@@ -8,9 +8,7 @@ const Pagination = () => {
   const page = useSelector((state) => state.page);
   const videogames = useSelector((state) => state.videogames);
 
-  console.log(videogames.length);
   const lastPage = Math.ceil(videogames.length / 15);
-  console.log(lastPage);
 
   const handleFirst = () => {
     dispatch(setPage(1));

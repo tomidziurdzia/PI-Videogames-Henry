@@ -12,11 +12,9 @@ const Videogames = () => {
   const loading = useSelector((state) => state.loading);
   const page = useSelector((state) => state.page);
 
-  const [gamePerPage, setGamePerPage] = useState(15);
+  const [gamePerPage, setGamePerPage] = useState(15); // eslint-disable-next-line
   const indexPage = page * gamePerPage;
   const indexPageLast = indexPage - gamePerPage;
-
-  console.log(indexPageLast);
 
   useEffect(() => {
     dispatch(setLoading(true));
