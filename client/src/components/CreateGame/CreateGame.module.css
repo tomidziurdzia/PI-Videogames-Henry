@@ -54,6 +54,7 @@
   font-size: 1.5rem;
   width: 80%;
   margin: auto;
+  justify-content: center;
 }
 
 .labelInput {
@@ -72,6 +73,16 @@
   border-radius: 10px;
   font-size: 1.4rem;
   color: #757575;
+  border: 2px solid #ff5d5d;
+}
+
+.inputOk {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  color: #757575;
+  border: 2px solid #9eb23b;
 }
 
 .genrePlatform {
@@ -86,7 +97,7 @@
   display: flex;
   flex-direction: column;
   margin: 1rem;
-  gap: 0.5rem;
+  gap: 1rem;
   width: 100%;
   margin-bottom: 2rem;
 }
@@ -123,4 +134,27 @@
 
 .btnSubmit:hover {
   cursor: pointer;
+}
+
+.btnDis {
+  background-color: white;
+  border: none;
+  color: #151515;
+  font-size: 2rem;
+  margin: auto;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 15rem;
+  opacity: 25%;
+}
+
+.error {
+  background-color: #ff5d5d;
+  color: white;
+  width: auto;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: 900;
+  padding: 0rem 1rem;
 }

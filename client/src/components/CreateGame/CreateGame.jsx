@@ -8,6 +8,7 @@ const CreateGame = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const genres = useSelector((state) => state.genres);
+  const [error, setError] = useState({});
 
   const [create, setCreate] = useState({
     name: "",
@@ -16,7 +17,7 @@ const CreateGame = () => {
     genres: [],
     platforms: [],
     rating: "",
-    released: Date.now(),
+    released: "",
   });
 
   const plataformas = [
@@ -134,12 +135,69 @@ const CreateGame = () => {
     },
   ];
 
+  const urlImg = (url) => {
+    return /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/.test(url);
+  };
+
+  const validateForm = (input) => {
+    const error = {};
+
+    if (input.name.length < 8) {
+      error.name = "El nombre tiene que tener al menos 8 caracteres";
+    }
+    if (!input.name) {
+      error.name = "El nombre es requerido";
+    } else if (!input.description) {
+      error.description = "La descripción es requerida";
+    } else if (!urlImg(input.background_image)) {
+      error.background_image = "La URL no es valida";
+    } else if (Number(input.rating) === 0) {
+      error.rating = "El rating no es valido";
+    } else if (!Date.parse(input.released)) {
+      error.released = "La fecha de lanzamiento es requerida";
+    } else if (input.genres.length === 0) {
+      error.genres = "Es requerido al menos un genero";
+    } else if (input.platforms.length === 0) {
+      error.platforms = "Es requerido al menos una plataforma";
+    }
+    return error;
+  };
+
+  const btnDisabled = !(
+    create.name &&
+    create.description &&
+    create.background_image &&
+    create.released &&
+    create.rating &&
+    create.platforms.length &&
+    create.genres.length
+  );
+
+  const handleChange = (e) => {
+    setCreate({
+      ...create,
+      [e.target.name]: e.target.value,
+    });
+    setError(
+      validateForm({
+        ...create,
+        [e.target.name]: e.target.value,
+      })
+    );
+  };
+
   const handleSelect = (e) => {
     if (create[e.target.name].includes(e.target.value)) return;
     setCreate({
       ...create,
       [e.target.name]: [...create[e.target.name], e.target.value],
     });
+    setError(
+      validateForm({
+        ...create,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const handleDelete = (e, option) => {
@@ -153,13 +211,20 @@ const CreateGame = () => {
     e.preventDefault();
 
     dispatch(postVideogame(create));
-    console.log("juego creado correctamente");
     navigate("/home");
   };
 
   useEffect(() => {
     dispatch(getGenres());
   }, [dispatch]);
+
+  useEffect(() => {
+    setError(
+      validateForm({
+        ...create,
+      })
+    );
+  }, [create]);
 
   return (
     <div className={styles.modalContainer}>
@@ -188,78 +253,84 @@ const CreateGame = () => {
             <div className={styles.labelInput}>
               <label htmlFor="name">* Name</label>
               <input
-                className={styles.input}
+                className={error.name ? styles.input : styles.inputOk}
                 type="text"
                 id="name"
                 placeholder="Name"
                 name="name"
                 value={create.name}
-                // Copia del estado y agrego el valor
-                onChange={(e) => setCreate({ ...create, name: e.target.value })}
+                onChange={handleChange}
               />
             </div>
+            {error.name && <span className={styles.error}>{error.name}</span>}
             <div className={styles.labelInput}>
               <label htmlFor="description">* Description</label>
               <textarea
-                className={styles.input}
+                className={!create.description ? styles.input : styles.inputOk}
                 type="textarea"
                 id="description"
                 placeholder="Description"
                 name="description"
                 value={create.description}
-                onChange={(e) =>
-                  setCreate({ ...create, description: e.target.value })
-                }
+                onChange={handleChange}
               />
             </div>
+            {error.description && (
+              <span className={styles.error}>{error.description}</span>
+            )}
             <div className={styles.labelInput}>
               <label htmlFor="background_image">* Image</label>
               <input
-                className={styles.input}
+                className={
+                  !create.background_image ? styles.input : styles.inputOk
+                }
                 type="text"
                 id="background_image"
                 placeholder="Image URL"
                 name="background_image"
                 value={create.background_image}
-                onChange={(e) =>
-                  setCreate({ ...create, background_image: e.target.value })
-                }
+                onChange={handleChange}
               />
             </div>
+            {error.background_image && (
+              <span className={styles.error}>{error.background_image}</span>
+            )}
             <div className={styles.labelInput}>
               <label htmlFor="rating">Rating</label>
               <input
-                className={styles.input}
+                className={!create.rating ? styles.input : styles.inputOk}
                 type="number"
                 id="rating"
-                placeholder="0.0"
+                placeholder="0"
                 step="0.1"
                 min="0"
                 max="5"
                 name="rating"
                 value={create.rating}
-                onChange={(e) =>
-                  setCreate({ ...create, rating: e.target.value })
-                }
+                onChange={handleChange}
               />
             </div>
+            {error.rating && (
+              <span className={styles.error}>{error.rating}</span>
+            )}
             <div className={styles.labelInput}>
               <label htmlFor="released">Released</label>
               <input
                 type="date"
-                className={styles.input}
+                className={error.released ? styles.input : styles.inputOk}
                 name="released"
                 value={create.released}
-                onChange={(e) =>
-                  setCreate({ ...create, released: e.target.value })
-                }
+                onChange={handleChange}
               />
             </div>
+            {error.released && (
+              <span className={styles.error}>{error.released}</span>
+            )}
             <div className={styles.genrePlatform}>
               <div className={styles.labelInputGenrePlatform}>
                 <label htmlFor="genres">Select Genre</label>
                 <select
-                  className={styles.input}
+                  className={error.genres ? styles.input : styles.inputOk}
                   name="genres"
                   defaultValue={"Select Genres"}
                   onChange={handleSelect}
@@ -271,6 +342,9 @@ const CreateGame = () => {
                     </option>
                   ))}
                 </select>
+                {error.genres && (
+                  <span className={styles.error}>{error.genres}</span>
+                )}
                 {create.genres?.map((e) => (
                   <div key={e} className={styles.selectContainer}>
                     <div>{e}</div>
@@ -300,7 +374,7 @@ const CreateGame = () => {
               <div className={styles.labelInputGenrePlatform}>
                 <label htmlFor="platforms">Select Platform</label>
                 <select
-                  className={styles.input}
+                  className={error.platforms ? styles.input : styles.inputOk}
                   name="platforms"
                   defaultValue={"Select Platforms"}
                   onChange={handleSelect}
@@ -312,6 +386,9 @@ const CreateGame = () => {
                     </option>
                   ))}
                 </select>
+                {error.platforms && (
+                  <span className={styles.error}>{error.platforms}</span>
+                )}
                 {create.platforms?.map((e) => (
                   <div key={e} className={styles.selectContainer}>
                     <div>{e}</div>
@@ -340,8 +417,12 @@ const CreateGame = () => {
             </div>
           </div>
         </div>
-        <button className={styles.btnSubmit} type="submit">
-          Submit
+        <button
+          disabled={btnDisabled}
+          className={btnDisabled ? styles.btnDis : styles.btnSubmit}
+          type="submit"
+        >
+          Create
         </button>
       </form>
     </div>
