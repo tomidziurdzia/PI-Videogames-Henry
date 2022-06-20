@@ -5,6 +5,7 @@ import {
   GAME_DETAIL,
   GET_GENRES,
   POST_VIDEOGAMES,
+  DELETE_VIDEOGAME,
 } from "../types";
 
 const initialState = {
@@ -53,6 +54,12 @@ const reducer = (state = initialState, action) => {
     }
 
     case POST_VIDEOGAMES: {
+      return {
+        ...state,
+      };
+    }
+
+    case DELETE_VIDEOGAME: {
       return {
         ...state,
       };

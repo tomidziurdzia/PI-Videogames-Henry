@@ -1,14 +1,19 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getGameDetail, setLoading } from "../../redux/actions";
-import { Link } from "react-router-dom";
+import {
+  getGameDetail,
+  setLoading,
+  deleteVideogame,
+} from "../../redux/actions";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./GameDetail.module.css";
 
 import Spinner from "../Spinner/Spinner";
 
 const GameDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const videogame = useSelector((state) => state.detail);
   const loading = useSelector((state) => state.loading);
@@ -17,6 +22,11 @@ const GameDetail = () => {
     dispatch(getGameDetail(id));
     dispatch(setLoading(true));
   }, [dispatch, id]);
+
+  const handleDelete = () => {
+    dispatch(deleteVideogame(id));
+    navigate("/home");
+  };
 
   console.log(videogame);
 
@@ -63,7 +73,9 @@ const GameDetail = () => {
           {videogame.createdDatabase ? (
             <div className={styles.buttonContainer}>
               <button className={styles.btnEdit}>Edit</button>
-              <button className={styles.btnDelete}>Delete</button>
+              <button onClick={handleDelete} className={styles.btnDelete}>
+                Delete
+              </button>
             </div>
           ) : (
             <div></div>

@@ -90,7 +90,7 @@
   font-size: 17px;
   padding: 7px 25px;
   width: 12rem;
-  background-color: green;
+  background-color: #9eb23b;
 }
 
 .btnEdit:hover {
@@ -98,7 +98,7 @@
 }
 
 .btnDelete {
-  background-color: red;
+  background-color: #ff5d5d;
   box-shadow: 1px 1px 3px 1px gray;
   border-radius: 10px;
   border: none;

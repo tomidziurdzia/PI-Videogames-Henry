@@ -5,6 +5,7 @@ import {
   SET_PAGE,
   GAME_DETAIL,
   GET_GENRES,
+  DELETE_VIDEOGAME,
 } from "../types";
 
 //const URL = process.env.BACKEND_URL;
@@ -82,6 +83,19 @@ const postVideogame = (payload) => {
   };
 };
 
+const deleteVideogame = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`http://localhost:3001/videogame/${id}`);
+      return dispatch({
+        type: DELETE_VIDEOGAME,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export {
   getVideogames,
   getGenres,
@@ -89,4 +103,5 @@ export {
   setPage,
   getGameDetail,
   postVideogame,
+  deleteVideogame,
 };

@@ -4,3 +4,4 @@ export const SET_PAGE = "SET_PAGE";
 export const GAME_DETAIL = "GAME_DETAIL";
 export const GET_GENRES = "GET_GENRES";
 export const POST_VIDEOGAMES = "POST_VIDEOGAMES";
+export const DELETE_VIDEOGAME = "DELETE_VIDEOGAME";

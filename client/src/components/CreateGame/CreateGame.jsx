@@ -209,8 +209,18 @@ const CreateGame = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     dispatch(postVideogame(create));
+
+    setCreate({
+      name: "",
+      description: "",
+      released: "",
+      rating: "",
+      background_image: "",
+      genres: [],
+      platforms: [],
+    });
+
     navigate("/home");
   };
 
