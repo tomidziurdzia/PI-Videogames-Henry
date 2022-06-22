@@ -112,47 +112,8 @@ const deleteVideogame = async (req, res) => {
   }
 };
 
-// Actualizar Videogame
-const updateVideogame = async (req, res) => {
-  const { id } = req.params;
-  const {
-    name,
-    description,
-    release_date,
-    rating,
-    platforms,
-    genres,
-    background_image,
-  } = req.body;
-
-  if (!name) res.status(404).send("El nombre es obligatorio");
-  if (!description) res.status(404).send("La descripcion es obligatoria");
-  if (!platforms) res.status(404).send("Las plataformas son obligatorias");
-
-  try {
-    await Videogame.update(
-      {
-        name,
-        description,
-        release_date,
-        rating,
-        platforms,
-        genres,
-        background_image,
-      },
-      {
-        where: { id },
-      }
-    );
-    return res.status(201).send("Juego editado correctamente");
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 module.exports = {
   getVideogame,
   deleteVideogame,
-  updateVideogame,
   createVideogame,
 };

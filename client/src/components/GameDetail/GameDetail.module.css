@@ -74,27 +74,9 @@
   width: 30rem;
   grid-area: 2 / 2 / 3 / 3;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
   margin: auto;
-}
-
-.btnEdit {
-  box-shadow: 1px 1px 3px 1px gray;
-  border-radius: 10px;
-  border: none;
-  display: inline-block;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 17px;
-  padding: 7px 25px;
-  width: 12rem;
-  background-color: #9eb23b;
-}
-
-.btnEdit:hover {
-  transform: scale(1.1);
 }
 
 .btnDelete {

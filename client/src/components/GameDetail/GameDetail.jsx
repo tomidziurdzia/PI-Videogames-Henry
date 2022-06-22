@@ -5,6 +5,7 @@ import {
   getGameDetail,
   setLoading,
   deleteVideogame,
+  getGenres,
 } from "../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./GameDetail.module.css";
@@ -28,8 +29,9 @@ const GameDetail = () => {
     navigate("/home");
   };
 
-  console.log(videogame);
-
+  useEffect(() => {
+    dispatch(getGenres());
+  }, [dispatch]);
   return (
     <>
       {loading ? (
@@ -72,7 +74,6 @@ const GameDetail = () => {
           </div>
           {videogame.createdDatabase ? (
             <div className={styles.buttonContainer}>
-              <button className={styles.btnEdit}>Edit</button>
               <button onClick={handleDelete} className={styles.btnDelete}>
                 Delete
               </button>
