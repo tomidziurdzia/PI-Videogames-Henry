@@ -125,4 +125,5 @@ const getAllVideogameSearchGame = async (req, res) => {
 
 module.exports = {
   getAllVideogameSearchGame,
+  getVideogamesDB,
 };

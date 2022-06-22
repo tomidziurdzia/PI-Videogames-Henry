@@ -6,6 +6,12 @@ import {
   GAME_DETAIL,
   GET_GENRES,
   DELETE_VIDEOGAME,
+  GET_VIDEOGAMES_API,
+  GET_VIDEOGAMES_DB,
+  FILTER_NAME,
+  FILTER_GENRE,
+  ORDER_NAME,
+  ORDER_RATING,
 } from "../types";
 
 //const URL = process.env.BACKEND_URL;
@@ -96,6 +102,42 @@ const deleteVideogame = (id) => {
   };
 };
 
+const getVideogamesApi = () => {
+  return async (dispatch) => {
+    try {
+      const videogames = await axios.get("http://localhost:3001/videogames");
+      const response = videogames.data.filter(
+        (game) => game.createdDatabase !== true
+      );
+      console.log(response);
+      return dispatch({
+        type: GET_VIDEOGAMES_API,
+        payload: response,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const getVideogamesDB = () => {
+  return async (dispatch) => {
+    try {
+      const videogames = await axios.get("http://localhost:3001/videogames");
+      const response = videogames.data.filter(
+        (game) => game.createdDatabase === true
+      );
+      console.log(response);
+      return dispatch({
+        type: GET_VIDEOGAMES_DB,
+        payload: response,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export {
   getVideogames,
   getGenres,
@@ -104,4 +146,6 @@ export {
   getGameDetail,
   postVideogame,
   deleteVideogame,
+  getVideogamesApi,
+  getVideogamesDB,
 };

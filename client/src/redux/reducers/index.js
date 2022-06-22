@@ -6,6 +6,8 @@ import {
   GET_GENRES,
   POST_VIDEOGAMES,
   DELETE_VIDEOGAME,
+  GET_VIDEOGAMES_API,
+  GET_VIDEOGAMES_DB,
 } from "../types";
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
   page: 1,
   detail: {},
   genres: [],
+  gamesFilter: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,6 +25,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         videogames: action.payload,
+        gamesFilter: action.payload,
         loading: false,
       };
     }
@@ -62,6 +66,22 @@ const reducer = (state = initialState, action) => {
     case DELETE_VIDEOGAME: {
       return {
         ...state,
+      };
+    }
+
+    case GET_VIDEOGAMES_API: {
+      return {
+        ...state,
+        gamesFilter: action.payload,
+        loading: false,
+      };
+    }
+
+    case GET_VIDEOGAMES_DB: {
+      return {
+        ...state,
+        gamesFilter: action.payload,
+        loading: false,
       };
     }
 

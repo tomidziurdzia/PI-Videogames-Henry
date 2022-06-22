@@ -11,6 +11,7 @@ const Videogames = () => {
   const videogames = useSelector((state) => state.videogames);
   const loading = useSelector((state) => state.loading);
   const page = useSelector((state) => state.page);
+  const gamesFilter = useSelector((state) => state.gamesFilter);
 
   const [gamePerPage, setGamePerPage] = useState(15); // eslint-disable-next-line
   const indexPage = page * gamePerPage;
@@ -30,7 +31,7 @@ const Videogames = () => {
           </div>
         ) : (
           <div className={styles.container}>
-            {videogames.slice(indexPageLast, indexPage).map((game) => (
+            {gamesFilter.slice(indexPageLast, indexPage).map((game) => (
               <Videogame
                 id={game.id}
                 key={game.id}

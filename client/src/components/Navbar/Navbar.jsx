@@ -1,16 +1,40 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setPage } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setPage,
+  setLoading,
+  getVideogamesApi,
+  getVideogamesDB,
+  getVideogames,
+} from "../../redux/actions";
 import styles from "./Navbar.module.css";
-import CreateGame from "../CreateGame/CreateGame";
 import SearchBar from "../SearchBar/SearchBar";
 
 const Navbar = () => {
   const dispatch = useDispatch();
 
+  const loading = useSelector((state) => state.loading);
+  const genres = useSelector((state) => state.genres);
+  //const gamesFilter = useSelector((state) => state.gamesFilter);
+
   const handleFirstPage = () => {
     dispatch(setPage(1));
+  };
+
+  const handleFilterGames = (e) => {
+    if (e.target.value === "all") {
+      dispatch(setLoading(true));
+      dispatch(getVideogames());
+    }
+    if (e.target.value === "api") {
+      dispatch(setLoading(true));
+      dispatch(getVideogamesApi());
+    }
+    if (e.target.value === "db") {
+      dispatch(setLoading(true));
+      dispatch(getVideogamesDB());
+    }
   };
 
   return (
@@ -19,7 +43,19 @@ const Navbar = () => {
         <h1 className={styles.title}>Videogames</h1>
       </Link>
       <SearchBar className={styles.searchBar} />
-      <div>Filtros</div>
+      <div>
+        <select onChange={handleFilterGames} name="games" id="games">
+          <option id="all" value="all">
+            Todos
+          </option>
+          <option id="db" value="db">
+            Creados
+          </option>
+          <option id="api" value="api">
+            API
+          </option>
+        </select>
+      </div>
       <Link className={styles.newBtn} to="/new">
         New Game
       </Link>
