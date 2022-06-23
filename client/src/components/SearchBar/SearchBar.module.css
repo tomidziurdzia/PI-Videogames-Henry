@@ -17,3 +17,7 @@
 .searchBar:focus {
   outline: none;
 }
+
+svg:hover {
+  cursor: pointer;
+}

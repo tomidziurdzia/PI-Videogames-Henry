@@ -8,6 +8,7 @@ import {
   DELETE_VIDEOGAME,
   GET_VIDEOGAMES_API,
   GET_VIDEOGAMES_DB,
+  SEARCH_NAME,
 } from "../types";
 
 const initialState = {
@@ -78,6 +79,14 @@ const reducer = (state = initialState, action) => {
     }
 
     case GET_VIDEOGAMES_DB: {
+      return {
+        ...state,
+        gamesFilter: action.payload,
+        loading: false,
+      };
+    }
+
+    case SEARCH_NAME: {
       return {
         ...state,
         gamesFilter: action.payload,

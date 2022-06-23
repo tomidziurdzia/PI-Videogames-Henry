@@ -8,7 +8,7 @@ import {
   DELETE_VIDEOGAME,
   GET_VIDEOGAMES_API,
   GET_VIDEOGAMES_DB,
-  FILTER_NAME,
+  SEARCH_NAME,
   FILTER_GENRE,
   ORDER_NAME,
   ORDER_RATING,
@@ -138,6 +138,22 @@ const getVideogamesDB = () => {
   };
 };
 
+const searchVideogame = (payload) => {
+  return async (dispatch) => {
+    try {
+      const videogames = await axios.get(
+        `http://localhost:3001/videogames?name=${payload}`
+      );
+      return dispatch({
+        type: SEARCH_NAME,
+        payload: videogames.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export {
   getVideogames,
   getGenres,
@@ -148,4 +164,5 @@ export {
   deleteVideogame,
   getVideogamesApi,
   getVideogamesDB,
+  searchVideogame,
 };

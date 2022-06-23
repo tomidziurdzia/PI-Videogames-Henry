@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+//import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   setPage,
   setLoading,
@@ -13,10 +13,6 @@ import SearchBar from "../SearchBar/SearchBar";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-
-  const loading = useSelector((state) => state.loading);
-  const genres = useSelector((state) => state.genres);
-  //const gamesFilter = useSelector((state) => state.gamesFilter);
 
   const handleFirstPage = () => {
     dispatch(setPage(1));
