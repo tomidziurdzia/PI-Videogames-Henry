@@ -8,7 +8,6 @@ import Spinner from "../Spinner/Spinner";
 
 const Videogames = () => {
   const dispatch = useDispatch();
-  const videogames = useSelector((state) => state.videogames);
   const loading = useSelector((state) => state.loading);
   const page = useSelector((state) => state.page);
   const gamesFilter = useSelector((state) => state.gamesFilter);

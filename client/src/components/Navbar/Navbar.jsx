@@ -7,6 +7,7 @@ import {
   getVideogamesApi,
   getVideogamesDB,
   getVideogames,
+  orderName,
 } from "../../redux/actions";
 import styles from "./Navbar.module.css";
 import SearchBar from "../SearchBar/SearchBar";
@@ -33,9 +34,17 @@ const Navbar = () => {
     }
   };
 
+  const handleOrderName = (e) => {
+    e.target.value === "A-Z"
+      ? dispatch(orderName(e.target.value), dispatch(setLoading(true)))
+      : e.target.value === "Z-A"
+      ? dispatch(orderName(e.target.value), dispatch(setLoading(true)))
+      : dispatch(getVideogames(), dispatch(setLoading(true)));
+  };
+
   return (
     <div className={styles.background}>
-      <Link className={styles.titleLink} to="/home" onClick={handleFirstPage}>
+      <Link className={styles.titleLink} to="/" onClick={handleFirstPage}>
         <h1 className={styles.title}>Videogames</h1>
       </Link>
       <SearchBar className={styles.searchBar} />
@@ -49,6 +58,17 @@ const Navbar = () => {
           </option>
           <option id="api" value="api">
             API
+          </option>
+        </select>
+      </div>
+      <div>
+        <select onChange={handleOrderName} name="names" id="names">
+          <option value="orden">Ordenar</option>
+          <option id="A-Z" value="A-Z">
+            A-Z
+          </option>
+          <option id="Z-A" value="Z-A">
+            Z-A
           </option>
         </select>
       </div>

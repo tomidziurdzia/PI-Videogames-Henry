@@ -9,6 +9,9 @@ import {
   GET_VIDEOGAMES_API,
   GET_VIDEOGAMES_DB,
   SEARCH_NAME,
+  FILTER_GENRE,
+  ORDER_NAME,
+  ORDER_RATING,
 } from "../types";
 
 const initialState = {
@@ -90,6 +93,25 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         gamesFilter: action.payload,
+        loading: false,
+      };
+    }
+
+    case ORDER_NAME: {
+      let orderGames;
+      if (action.payload === "A-Z") {
+        orderGames = state.gamesFilter.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+      }
+      if (action.payload === "Z-A") {
+        orderGames = state.gamesFilter.sort((a, b) =>
+          b.name.localeCompare(a.name)
+        );
+      }
+      return {
+        ...state,
+        gamesFilter: orderGames,
         loading: false,
       };
     }

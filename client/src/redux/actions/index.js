@@ -154,6 +154,27 @@ const searchVideogame = (payload) => {
   };
 };
 
+const orderName = (payload) => {
+  return {
+    type: ORDER_NAME,
+    payload,
+  };
+};
+
+const orderRating = (payload) => {
+  return {
+    type: ORDER_NAME,
+    payload,
+  };
+};
+
+const filterGenre = (payload) => {
+  return {
+    type: ORDER_NAME,
+    payload,
+  };
+};
+
 export {
   getVideogames,
   getGenres,
@@ -165,4 +186,7 @@ export {
   getVideogamesApi,
   getVideogamesDB,
   searchVideogame,
+  orderName,
+  orderRating,
+  filterGenre,
 };
