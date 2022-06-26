@@ -19,7 +19,6 @@ import SearchBar from "../SearchBar/SearchBar";
 const Navbar = () => {
   const dispatch = useDispatch();
   const genres = useSelector((state) => state.genres);
-  console.log(genres);
 
   useEffect(() => {
     dispatch(getGenres());
@@ -71,6 +70,13 @@ const Navbar = () => {
       : dispatch(filterGenre(e.target.value), dispatch(setLoading(true)));
   };
 
+  const handleReset = (e) => {
+    e.preventDefault();
+    dispatch(getVideogames());
+    dispatch(setPage(1));
+    dispatch(setLoading(true));
+  };
+
   return (
     <div className={styles.background}>
       <Link className={styles.titleLink} to="/" onClick={handleFirstPage}>
@@ -119,6 +125,7 @@ const Navbar = () => {
             );
           })}
         </select>
+        <button onClick={handleReset}>Reset</button>
       </div>
       <Link className={styles.newBtn} to="/new">
         New Game
