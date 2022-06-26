@@ -163,14 +163,14 @@ const orderName = (payload) => {
 
 const orderRating = (payload) => {
   return {
-    type: ORDER_NAME,
+    type: ORDER_RATING,
     payload,
   };
 };
 
 const filterGenre = (payload) => {
   return {
-    type: ORDER_NAME,
+    type: FILTER_GENRE,
     payload,
   };
 };

@@ -116,6 +116,25 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case ORDER_RATING: {
+      let orderGames;
+      if (action.payload === "mayor") {
+        orderGames = state.gamesFilter.sort((a, b) =>
+          a.rating > b.rating ? -1 : 1
+        );
+      }
+      if (action.payload === "menor") {
+        orderGames = state.gamesFilter.sort((a, b) =>
+          a.rating < b.rating ? -1 : 1
+        );
+      }
+      return {
+        ...state,
+        gamesFilter: orderGames,
+        loading: false,
+      };
+    }
+
     default:
       return state;
   }

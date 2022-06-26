@@ -8,6 +8,7 @@ import {
   getVideogamesDB,
   getVideogames,
   orderName,
+  orderRating,
 } from "../../redux/actions";
 import styles from "./Navbar.module.css";
 import SearchBar from "../SearchBar/SearchBar";
@@ -36,9 +37,17 @@ const Navbar = () => {
 
   const handleOrderName = (e) => {
     e.target.value === "A-Z"
-      ? dispatch(orderName(e.target.value), dispatch(setLoading(true)))
+      ? dispatch(orderRating(e.target.value), dispatch(setLoading(true)))
       : e.target.value === "Z-A"
-      ? dispatch(orderName(e.target.value), dispatch(setLoading(true)))
+      ? dispatch(orderRating(e.target.value), dispatch(setLoading(true)))
+      : dispatch(getVideogames(), dispatch(setLoading(true)));
+  };
+
+  const handleOrderRating = (e) => {
+    e.target.value === "mayor"
+      ? dispatch(orderRating(e.target.value), dispatch(setLoading(true)))
+      : e.target.value === "menor"
+      ? dispatch(orderRating(e.target.value), dispatch(setLoading(true)))
       : dispatch(getVideogames(), dispatch(setLoading(true)));
   };
 
@@ -63,12 +72,21 @@ const Navbar = () => {
       </div>
       <div>
         <select onChange={handleOrderName} name="names" id="names">
-          <option value="orden">Ordenar</option>
+          <option value="orden">Nombre</option>
           <option id="A-Z" value="A-Z">
             A-Z
           </option>
           <option id="Z-A" value="Z-A">
             Z-A
+          </option>
+        </select>
+        <select onChange={handleOrderRating} name="rating" id="rating">
+          <option value="orden">Rating</option>
+          <option id="mayor" value="mayor">
+            Mayor
+          </option>
+          <option id="menor" value="menor">
+            Menor
           </option>
         </select>
       </div>
