@@ -78,13 +78,24 @@ const Navbar = () => {
   };
 
   return (
-    <div className={styles.background}>
-      <Link className={styles.titleLink} to="/" onClick={handleFirstPage}>
-        <h1 className={styles.title}>Videogames</h1>
-      </Link>
-      <SearchBar className={styles.searchBar} />
-      <div>
-        <select onChange={handleFilterGames} name="games" id="games">
+    <div className={styles.container}>
+      <div className={styles.background}>
+        <Link className={styles.titleLink} to="/" onClick={handleFirstPage}>
+          <h1 className={styles.title}>Videogames</h1>
+        </Link>
+        <SearchBar className={styles.searchBar} />
+
+        <Link className={styles.newBtn} to="/new">
+          New Game
+        </Link>
+      </div>
+      <div className={styles.filterContainer}>
+        <select
+          className={styles.select}
+          onChange={handleFilterGames}
+          name="games"
+          id="games"
+        >
           <option id="all" value="all">
             Todos
           </option>
@@ -95,9 +106,12 @@ const Navbar = () => {
             API
           </option>
         </select>
-      </div>
-      <div>
-        <select onChange={handleOrderName} name="names" id="names">
+        <select
+          className={styles.select}
+          onChange={handleOrderName}
+          name="names"
+          id="names"
+        >
           <option value="orden">Nombre</option>
           <option id="A-Z" value="A-Z">
             A-Z
@@ -106,7 +120,12 @@ const Navbar = () => {
             Z-A
           </option>
         </select>
-        <select onChange={handleOrderRating} name="rating" id="rating">
+        <select
+          className={styles.select}
+          onChange={handleOrderRating}
+          name="rating"
+          id="rating"
+        >
           <option value="orden">Rating</option>
           <option id="mayor" value="mayor">
             Mayor
@@ -115,7 +134,12 @@ const Navbar = () => {
             Menor
           </option>
         </select>
-        <select onChange={handleFilterGenres} name="genres" id="genres">
+        <select
+          className={styles.select}
+          onChange={handleFilterGenres}
+          name="genres"
+          id="genres"
+        >
           <option value="genres">Géneros</option>
           {genres.map((genre) => {
             return (
@@ -125,11 +149,10 @@ const Navbar = () => {
             );
           })}
         </select>
-        <button onClick={handleReset}>Reset</button>
+        <button className={styles.newBtn} onClick={handleReset}>
+          Reset
+        </button>
       </div>
-      <Link className={styles.newBtn} to="/new">
-        New Game
-      </Link>
     </div>
   );
 };

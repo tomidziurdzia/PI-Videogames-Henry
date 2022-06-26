@@ -1,9 +1,7 @@
 .searchContainer {
   display: flex;
   background: white;
-  margin-right: 10rem;
   padding: 0.5rem 1rem;
-  margin-top: 2rem;
   border-radius: 10px;
 }
 
