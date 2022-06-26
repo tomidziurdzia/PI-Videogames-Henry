@@ -135,6 +135,17 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case FILTER_GENRE: {
+      const filterGames = state.videogames.filter((genre) =>
+        genre.genres.includes(action.payload)
+      );
+      return {
+        ...state,
+        gamesFilter: filterGames,
+        loading: false,
+      };
+    }
+
     default:
       return state;
   }

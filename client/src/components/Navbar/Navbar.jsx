@@ -1,6 +1,7 @@
 //import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setPage,
   setLoading,
@@ -9,12 +10,20 @@ import {
   getVideogames,
   orderName,
   orderRating,
+  filterGenre,
+  getGenres,
 } from "../../redux/actions";
 import styles from "./Navbar.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const genres = useSelector((state) => state.genres);
+  console.log(genres);
+
+  useEffect(() => {
+    dispatch(getGenres());
+  }, [dispatch]);
 
   const handleFirstPage = () => {
     dispatch(setPage(1));
@@ -24,6 +33,7 @@ const Navbar = () => {
     if (e.target.value === "all") {
       dispatch(setLoading(true));
       dispatch(getVideogames());
+      dispatch(setPage(1));
     }
     if (e.target.value === "api") {
       dispatch(setLoading(true));
@@ -37,9 +47,9 @@ const Navbar = () => {
 
   const handleOrderName = (e) => {
     e.target.value === "A-Z"
-      ? dispatch(orderRating(e.target.value), dispatch(setLoading(true)))
+      ? dispatch(orderName(e.target.value), dispatch(setLoading(true)))
       : e.target.value === "Z-A"
-      ? dispatch(orderRating(e.target.value), dispatch(setLoading(true)))
+      ? dispatch(orderName(e.target.value), dispatch(setLoading(true)))
       : dispatch(getVideogames(), dispatch(setLoading(true)));
   };
 
@@ -49,6 +59,16 @@ const Navbar = () => {
       : e.target.value === "menor"
       ? dispatch(orderRating(e.target.value), dispatch(setLoading(true)))
       : dispatch(getVideogames(), dispatch(setLoading(true)));
+  };
+
+  const handleFilterGenres = (e) => {
+    e.target.value === "genres"
+      ? dispatch(
+          setLoading(true),
+          dispatch(getVideogames()),
+          dispatch(setPage(1))
+        )
+      : dispatch(filterGenre(e.target.value), dispatch(setLoading(true)));
   };
 
   return (
@@ -88,6 +108,16 @@ const Navbar = () => {
           <option id="menor" value="menor">
             Menor
           </option>
+        </select>
+        <select onChange={handleFilterGenres} name="genres" id="genres">
+          <option value="genres">Géneros</option>
+          {genres.map((genre) => {
+            return (
+              <option value={genre.name} key={genre.name}>
+                {genre.name}
+              </option>
+            );
+          })}
         </select>
       </div>
       <Link className={styles.newBtn} to="/new">
