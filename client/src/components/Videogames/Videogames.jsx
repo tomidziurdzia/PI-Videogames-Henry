@@ -29,18 +29,26 @@ const Videogames = () => {
             <Spinner />
           </div>
         ) : (
-          <div className={styles.container}>
-            {gamesFilter.slice(indexPageLast, indexPage).map((game) => (
-              <Videogame
-                id={game.id}
-                key={game.id}
-                name={game.name}
-                background_image={game.background_image}
-                genres={game.genres}
-                rating={game.rating}
-                platforms={game.platforms}
-              />
-            ))}
+          <div>
+            {gamesFilter.length === 0 ? (
+              <div className={styles.notFound}>
+                No se ha encontrado ningun juego. Oprima el boton de Reset
+              </div>
+            ) : (
+              <div className={styles.container}>
+                {gamesFilter.slice(indexPageLast, indexPage).map((game) => (
+                  <Videogame
+                    id={game.id}
+                    key={game.id}
+                    name={game.name}
+                    background_image={game.background_image}
+                    genres={game.genres}
+                    rating={game.rating}
+                    platforms={game.platforms}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

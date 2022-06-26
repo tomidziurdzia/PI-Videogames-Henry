@@ -72,9 +72,9 @@ const Navbar = () => {
 
   const handleReset = (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
     dispatch(getVideogames());
     dispatch(setPage(1));
-    dispatch(setLoading(true));
   };
 
   return (
