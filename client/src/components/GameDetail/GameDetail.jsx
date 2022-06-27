@@ -70,7 +70,9 @@ const GameDetail = () => {
           <div className={styles.detailContainer}>
             <p className={styles.rating}>{videogame.rating}</p>
             <h2 className={styles.name}>{videogame.name}</h2>
-            <p className={styles.description}>{videogame.description}</p>
+            <p className={styles.description}>
+              {videogame.description.replace(/<[^>]+>/g, "")}
+            </p>
           </div>
           {videogame.createdDatabase ? (
             <div className={styles.buttonContainer}>

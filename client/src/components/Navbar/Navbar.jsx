@@ -81,7 +81,7 @@ const Navbar = () => {
     <div className={styles.container}>
       <div className={styles.background}>
         <Link className={styles.titleLink} to="/" onClick={handleFirstPage}>
-          <h1 className={styles.title}>Videogames</h1>
+          <h1 className={styles.title}>Henrygames</h1>
         </Link>
         <SearchBar className={styles.searchBar} />
 
