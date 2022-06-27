@@ -150,6 +150,8 @@ const searchVideogame = (payload) => {
       });
     } catch (error) {
       console.log(error);
+      alert("El videogame no ha sido encontrado");
+      window.location.href = "http://localhost:3000/home";
     }
   };
 };
